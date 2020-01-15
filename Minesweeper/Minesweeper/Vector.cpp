@@ -25,7 +25,7 @@ Vector<T>::Vector(Vector<T>::size_type n)
 }
 
 template<class T>
-Vector<T>::Vector(Vector<T>::size_type n, T val)
+Vector<T>::Vector(Vector<T>::size_type n, T& val)
 {
 	//Determining necessary capacity to store n elements
 	size_type m_capacity = pow(2, ceil(log2((double)n)));
@@ -38,7 +38,7 @@ Vector<T>::Vector(Vector<T>::size_type n, T val)
 
 	//Filling array with copies of specified val
 	for (int i=0; i < n; ++1) {
-		m_data[i] = T(element);
+		m_data[i] = T(val);
 	}
 }
 
@@ -58,6 +58,20 @@ Vector<T>::Vector(const Vector<T>& vector)
 	}
 }
 
+template<class T>
+Vector<T>::Vector(Vector<T>&& vector)
+{
+	//Transfert of the other vector's internal data to the new object
+	m_data = vector.m_data;
+	m_size = vector.m_size;
+	m_capacity = vector.m_capacity;
+
+	//Removing ownership of data from other object
+	vector.m_data = nullptr;
+	vector.m_size = 0;
+	vector.m_capacity = 0;
+}
+
 template <class T>
 Vector<T>::~Vector()
 {
@@ -66,7 +80,46 @@ Vector<T>::~Vector()
 }
 
 template<class T>
-typename Vector<T>::size_type Vector<T>::size()
+Vector<T>& Vector<T>::operator=(const Vector<T>& vector)
+{
+	if (this != &vector) {
+		delete[] m_data;
+
+		m_capacity = vector.m_capacity;
+		m_size = vector.m_size;
+
+		m_data = new T[m_capacity];
+
+		for (int i; i < m_size; ++i) {
+			m_data[i] = T(vector.m_data[i]);
+		}
+	}
+
+	return this*;
+}
+
+template<class T>
+Vector<T>& Vector<T>::operator=(Vector<T>&& vector)
+{
+	if (this != &vector) {
+		delete[] m_data;
+
+		//Transfert of the other vector's internal data to the calling object
+		m_size = vector.m_size;
+		m_capacity = vector.m_capacity;
+		m_data = vector.m_data;
+
+		//Removing ownership of data from other object
+		vector.m_data = nullptr;
+		vector.m_size = 0;
+		vector.m_capacity = 0;
+	}
+
+	return this*;
+}
+
+template<class T>
+typename Vector<T>::size_type Vector<T>::size() const
 {
 	return m_size;
 }
@@ -107,13 +160,13 @@ void Vector<T>::resize(size_type n, const T & val)
 }
 
 template<class T>
-typename Vector<T>::size_type Vector<T>::capacity()
+typename Vector<T>::size_type Vector<T>::capacity() const
 {
 	return m_capacity;
 }
 
 template<class T>
-bool Vector<T>::empty()
+bool Vector<T>::empty() const
 {
 	//Object is considered empty if size (nb of elements) is 0
 	return m_size==0;
@@ -169,4 +222,94 @@ void Vector<T>::shrink_to_fit()
 		//The internal capacity is set to the determined capacity
 		m_capacity = newCapacity;
 	}
+}
+
+template<class T>
+T & Vector<T>::operator[](size_type n)
+{
+	return m_data[n];
+}
+
+template<class T>
+const T & Vector<T>::operator[](size_type n) const
+{
+	return m_data[n];
+}
+
+template<class T>
+T & Vector<T>::at(size_type n)
+{
+	if (n < m_size) {
+		return m_data[n];
+	}
+	else {
+		return T();
+	}
+}
+
+template<class T>
+const T & Vector<T>::at(size_type n) const
+{
+	if (n < m_size) {
+		return m_data[n];
+	}
+	else {
+		return T();
+	}
+}
+
+template<class T>
+T & Vector<T>::front()
+{
+	if (m_size != 0) {
+		return m_data[0];
+	}
+	else {
+		return T();
+	}
+}
+
+template<class T>
+const T & Vector<T>::front() const
+{
+	if (m_size != 0) {
+		return m_data[0];
+	}
+	else {
+		return T();
+	}
+}
+
+template<class T>
+T & Vector<T>::back()
+{
+	if (m_size != 0) {
+		return m_data[m_size - 1];
+	}
+	else {
+		return T();
+	}
+}
+
+template<class T>
+const T & Vector<T>::back() const
+{
+	/ if (m_size != 0) {
+		return m_data[m_size - 1];
+	}
+	else {
+		return T();
+	}
+}
+
+template<class T>
+T * Vector<T>::data()
+{
+	return m_data;
+}
+
+template<class T>
+const T * Vector<T>::data() const
+{
+	return m_data;
 }

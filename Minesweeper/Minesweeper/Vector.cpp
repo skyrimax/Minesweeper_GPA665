@@ -1,6 +1,7 @@
 #include "Vector.h"
 
 #include<cmath>
+#include<utility>
 
 template<class T>
 Vector<T>::Vector()
@@ -312,4 +313,95 @@ template<class T>
 const T * Vector<T>::data() const
 {
 	return m_data;
+}
+
+template<class T>
+void Vector<T>::assign(size_type n, const T & val)
+{
+	delete[] m_data;
+
+	m_capacity = pow(2, ceil(log2((double)n)));
+	m_size = n;
+
+	m_data = new[m_capacity];
+
+	for (int i = 0; i < m_size; ++i) {
+		m_data[i] = T(val);
+	}
+}
+
+template<class T>
+void Vector<T>::push_back(const T & val)
+{
+	reserve(m_size + 1);
+
+	m_data[m_size] = val;
+
+	++m_size;
+}
+
+template<class T>
+void Vector<T>::push_back(T && val)
+{
+	reserve(m_size + 1);
+
+	m_data[m_size] = std::move(val);
+
+	++m_size;
+}
+
+template<class T>
+void Vector<T>::pop_back()
+{
+	--m_size;
+
+	m_data[m_size] = T();
+}
+
+template<class T>
+void Vector<T>::erase(size_type pos, size_type n)
+{
+	int i;
+
+	for (i = pos; i < pos + n && i + n < m_size; ++i) {
+		m_data[i] = m_data[i + n];
+	}
+
+	for (; i < m_size, ++i) {
+		m_data[i] = T();
+	}
+
+	m_size -= n;
+}
+
+template<class T>
+void Vector<T>::swap(Vector<T>& vector)
+{
+	size_type holdSize = m_size;
+	size_type holdCapacity = m_capacity;
+	T* holdArray = m_data;
+
+	m_size = vector.m_size;
+	m_capacity = vector.m_capacity;
+	m_data = vector.m_data;
+
+	vector.m_size = holdSize;
+	vector.m_capacity = holdCapacity;
+	vector.m_data = holdArray;
+}
+
+template<class T>
+void Vector<T>::clear()
+{
+	for (int i = 0; i < m_size; ++i) {
+		m_data[i] = T();
+	}
+
+	m_size = 0;
+}
+
+template<class T>
+inline void swap(Vector<T>& x, Vector<T>& y)
+{
+	x.swap(y);
 }

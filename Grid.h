@@ -70,7 +70,7 @@ public:
 	void clear();
 
 private:
-	Vector<Vector<T>&> m_data;
+	Vector<T> m_data;
 	size_type m_nbRows;
 	size_type m_nbCols;
 };

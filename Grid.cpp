@@ -14,12 +14,7 @@ Grid<T>::Grid(size_type nbRows, size_type nbCols)
 {
 	m_nbRows = nbRows;
 	m_nbCols = nbCols;
-
-	m_data.resize(nbRows);
-
-	for (int i = 0; i < nbRows; ++i) {
-		m_data[i] = Vector<T>(nbCols);
-	}
+	m_data = Vector<T>(m_nbRows*m_nbCols);
 }
 
 template<class T>
@@ -27,12 +22,7 @@ Grid<T>::Grid(size_type nbRows, size_type nbCols, const T & val)
 {
 	m_nbRows = nbRows;
 	m_nbCols = nbCols;
-
-	m_data.resize(nbRows);
-
-	for (int i = 0; i < nbRows; ++i) {
-		m_data[i] = Vector<T>(nbCols, val);
-	}
+	m_data = Vector<T>(m_nbRows*m_nbCols, val);
 }
 
 template<class T>
@@ -90,36 +80,28 @@ template<class T>
 template<class T>
 void Grid<T>::resize(size_type nbRows, size_type nbCols)
 {
-	Vector<T>newArray(nbRows);
+	Vector<T>newArray(nbRows*nbCols);
 
-	for (int i = 0; i < nbRows; ++i) {
-		newArray[i] = Vector<T>(nbCols);
-
-		for (int j = 0; j < m_nbCols && j < nbCols; ++j) {
-			if (i < m_nbRows) {
-				newArray[i][j] = m_data[i][j];
-			}
+	for (int i = 0; i < m_nbRows && i < nbRows; ++i) {
+		for (int j - 0; j < m_nbCols && j < nbCols; ++j) {
+			newArray[i*nbCols + j] = this(i, j);
 		}
 	}
 
 	m_data.swap(newArray);
 
 	m_nbRows = nbRows;
-	m_nbCols = nbCols;
+	m_nbCols - nbCols;
 }
 
 template<class T>
 void Grid<T>::resize(size_type nbRows, size_type nbCols, T & val)
 {
-	Vector<T>newArray(nbRows);
+	Vector<T>newArray(nbRows*nbCols, val);
 
-	for (int i = 0; i < nbRows; ++i) {
-		newArray[i] = Vector<T>(nbCols, val);
-
+	for (int i = 0; i < m_nbRows && i < nbRows; ++i) {
 		for (int j - 0; j < m_nbCols && j < nbCols; ++j) {
-			if (i < m_nbRows) {
-				newArray[i][j] = m_data[i][j];
-			}
+			newArray[i*nbCols + j] = this(i, j);
 		}
 	}
 
@@ -138,20 +120,20 @@ bool Grid<T>::empty()
 template<class T>
 T & Grid<T>::operator()(size_type row, size_type col)
 {
-	return m_data[row][col];
+	return m_data[row*m_nbCols + col];
 }
 
 template<class T>
 const T & Grid<T>::operator()(size_type row, size_type col) const
 {
-	return m_data[row][col];
+	return m_data[row*m_nbCols + col];
 }
 
 template<class T>
 T & Grid<T>::at(size_type row, size_type col)
 {
 	if (row < m_nbRows && col < m_nbCols) {
-		return m_data[row][col];
+		return m_data[row*m_nbCols + col];
 	}
 	else {
 		return T();
@@ -162,7 +144,7 @@ template<class T>
 const T & Grid<T>::at(size_type row, size_type col) const
 {
 	if (row < m_nbRows && col < m_nbCols) {
-		return m_data[row][col];
+		return m_data[row*m_nbCols + col];
 	}
 	else {
 		return T();

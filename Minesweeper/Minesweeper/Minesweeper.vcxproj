@@ -90,11 +90,9 @@
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Coordinates.cpp" />
-    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Minefield.cpp" />
     <ClCompile Include="Minesweeper.cpp" />
-    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Minesweeper.h" />
@@ -111,6 +109,10 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Minefield.h" />
     <ClInclude Include="Vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Grid.tpp" />
+    <None Include="Vector.tpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -21,7 +21,7 @@ Box::~Box()
 
 bool Box::exposed()
 {
-	return exposed();
+	return m_exposed;
 }
 
 int Box::value()
@@ -31,7 +31,7 @@ int Box::value()
 
 void Box::expose()
 {
-	if (m_exposed == false) {
+	if (!m_exposed) {
 		m_exposed = true;
 
 		for (int i; i < m_neighbors.size(); ++i) {

@@ -1,5 +1,7 @@
 #include "Grid.h"
 
+#pragma once
+
 #include<utility>
 
 template<class T>
@@ -7,6 +9,8 @@ Grid<T>::Grid()
 {
 	m_nbRows = 1;
 	m_nbRows = 1;
+
+	m_data = new Vector<Vector<T>*>;
 }
 
 template<class T>
@@ -18,7 +22,7 @@ Grid<T>::Grid(size_type nbRows, size_type nbCols)
 	m_data.resize(nbRows);
 
 	for (int i = 0; i < nbRows; ++i) {
-		m_data[i] = Vector<T>(nbCols);
+		m_data[i] = new Vector<T>(nbCols);
 	}
 }
 
@@ -31,7 +35,7 @@ Grid<T>::Grid(size_type nbRows, size_type nbCols, const T & val)
 	m_data.resize(nbRows);
 
 	for (int i = 0; i < nbRows; ++i) {
-		m_data[i] = Vector<T>(nbCols, val);
+		m_data[i] = new Vector<T>(nbCols, val);
 	}
 }
 
@@ -40,7 +44,13 @@ Grid<T>::Grid(const Grid<T>& grid)
 {
 	m_nbRows = grid.m_nbRows;
 	m_nbCols = grid.m_nbCols;
-	m_data = grid.m_data;
+
+	m_data.resize(m_nbRows);
+
+	for (int i = 0; i < m_nbRows; ++i) {
+		delete m_data[i];
+		m_data[i] = new Vector<T>(*grid.m_data[i]);
+	}
 }
 
 template<class T>
@@ -54,6 +64,9 @@ Grid<T>::Grid(Grid<T>&& grid)
 template<class T>
 Grid<T>::~Grid()
 {
+	for (int i = 0; i < m_data.size(); ++i) {
+		delete m_data[i];
+	}
 }
 
 template<class T>

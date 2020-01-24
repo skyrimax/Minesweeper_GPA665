@@ -1,5 +1,7 @@
 #include "Vector.h"
 
+#pragma once
+
 #include<cmath>
 #include<utility>
 

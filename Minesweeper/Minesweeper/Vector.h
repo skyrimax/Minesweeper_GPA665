@@ -57,3 +57,5 @@ private:
 
 template<class T>
 void swap(Vector<T>& x, Vector<T>& y);
+
+#include "Vector.tpp"

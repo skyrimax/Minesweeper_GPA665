@@ -26,7 +26,7 @@ public:
 	Minefield();
 	Minefield(size_type nbRows, size_type nbCols);
 	Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff);
-	Minefield(size_type nbRows, size_type nbCols, int mineDensity);
+	Minefield(size_type nbRows, size_type nbCols, double mineDensity);
 	Minefield(size_type nbRows, size_type nbCols, int nbMines);
 	~Minefield();
 

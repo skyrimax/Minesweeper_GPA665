@@ -55,8 +55,8 @@ public:
 	const Grid<T&> lastColGrid() const;
 	Vector<T&> lastColVector();
 	const Vector<T&> lastColVector() const;
-	Vector<T> data();
-	const Vector<T> data() const;
+	Vector<Vector<T>*>* data();
+	const Vector<Vector<T>*>* data() const;
 
 	//Modifiers
 	void assign(size_type nbRows, size_type nbCols, const T& val);
@@ -64,7 +64,7 @@ public:
 	void insertRow(size_type row, const Vector<T>& elements);
 	void insertCols(size_type col, const Grid<T>& elements);
 	void insertCol(size_type col, const Vector<T>& elements);
-	void removeRows(size_type row, size_type n=1);
+	void removeRows(size_type row, size_type n = 1);
 	void removeCols(size_type col, size_type n = 1);
 	void swap(Grid<T>& grid);
 	void clear();
@@ -75,4 +75,4 @@ private:
 	size_type m_nbCols;
 };
 
-#include"Grid.tpp""
+#include"Grid.tpp"

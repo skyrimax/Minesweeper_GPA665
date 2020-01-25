@@ -187,7 +187,7 @@ void Vector<T>::reserve(size_type n)
 		T* newArray = new T[newCapacity];
 
 		//Copy of elements from previous array to new array
-		for (int i = 0; i < m_size) {
+		for (int i = 0; i < m_size; ++i) {
 			newArray[i] = m_data[i];
 		}
 
@@ -246,7 +246,7 @@ T & Vector<T>::at(size_type n)
 		return m_data[n];
 	}
 	else {
-		return T();
+		throw std::out_of_range("vector::_M_range_check");
 	}
 }
 
@@ -257,7 +257,7 @@ const T & Vector<T>::at(size_type n) const
 		return m_data[n];
 	}
 	else {
-		return T();
+		throw std::out_of_range("vector::_M_range_check");
 	}
 }
 
@@ -268,7 +268,7 @@ T & Vector<T>::front()
 		return m_data[0];
 	}
 	else {
-		return T();
+		throw std::out_of_range("vector::_M_range_check");
 	}
 }
 
@@ -279,7 +279,7 @@ const T & Vector<T>::front() const
 		return m_data[0];
 	}
 	else {
-		return T();
+		throw std::out_of_range("vector::_M_range_check");
 	}
 }
 
@@ -290,7 +290,7 @@ T & Vector<T>::back()
 		return m_data[m_size - 1];
 	}
 	else {
-		return T();
+		throw std::out_of_range("vector::_M_range_check");
 	}
 }
 
@@ -301,7 +301,7 @@ const T & Vector<T>::back() const
 		return m_data[m_size - 1];
 	}
 	else {
-		return T();
+		rthrow std::out_of_range("vector::_M_range_check");
 	}
 }
 

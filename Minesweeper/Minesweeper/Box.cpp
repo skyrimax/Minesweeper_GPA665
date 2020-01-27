@@ -40,6 +40,16 @@ void Box::expose()
 	}
 }
 
+void Box::mark()
+{
+	if (m_marked) {
+		m_marked = false;
+	}
+	else {
+		m_marked = true;
+	}
+}
+
 void Box::addNeighbors(Box * neighbor)
 {
 	m_neighbors.push_back(neighbor);

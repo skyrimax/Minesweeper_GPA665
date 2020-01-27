@@ -31,9 +31,10 @@ public:
 	~Minefield();
 
 	void explore(Coordinates pos);
+
 	
 private:
-	Grid<Box*> m_field;
+	Grid<Box*>* m_field;
 
 	UIType m_uiType;
 };

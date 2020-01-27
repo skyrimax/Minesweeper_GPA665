@@ -2,24 +2,39 @@
 
 #include "Vector.h"
 
+class Minefield;
+
 class Box
 {
 public:
+	enum class Marking {
+		Blank,
+		Flag,
+		QuestionMark
+	};
+
 	Box();
-	Box(int value);
+	Box(Minefield* minefield, int value, bool exposed = false, Marking marked = Marking::Blank);
 	~Box();
 
 	bool exposed();
 	int value();
+	Marking marked();
 
 	void expose();
 	void mark();
+
 	void addNeighbors(Box* neighbor);
+	void clearNeighbors();
+
+	void initialiseMines();
 
 private:
 	int m_value;
 	bool m_exposed;
-	bool m_marked;
+	Marking m_marked;
+
+	Minefield* m_minefield;
 
 	Vector<Box*> m_neighbors;
 };

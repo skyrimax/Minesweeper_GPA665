@@ -11,16 +11,22 @@ public:
 	typedef unsigned int size_type;
 
 	enum class DifficultyLevel {
-		ndTresFacile,
-		ndFacile,
-		ndMoyen,
-		ndDifficile,
-		ndTresDifficile
+		TresFacile,
+		Facile,
+		Moyen,
+		Difficile,
+		TresDifficile
 	};
 
 	enum class UIType {
-		synchronous,
-		asynchronous
+		Synchronous,
+		Asynchronous
+	};
+
+	enum class State {
+		InGame,
+		Defeat,
+		Victory
 	};
 
 	Minefield();
@@ -30,11 +36,22 @@ public:
 	Minefield(size_type nbRows, size_type nbCols, int nbMines);
 	~Minefield();
 
-	void explore(Coordinates pos);
+	State gameState();
 
+	void explore(Coordinates pos);
+	void mark(Coordinates pos);
+
+	void boxExplored();
 	
 private:
+	void evaluateState();
+
 	Grid<Box*>* m_field;
+	Vector<Box*>* m_mines;
+	State m_gameState;
+
+	int m_nbBowUnexplored;
+	int m_nbMines;
 
 	UIType m_uiType;
 };

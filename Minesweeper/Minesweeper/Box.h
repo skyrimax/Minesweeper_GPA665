@@ -14,11 +14,12 @@ public:
 	};
 
 	Box();
-	Box(Minefield* minefield, int value, bool exposed = false, Marking marked = Marking::Blank);
+	Box(Minefield* minefield, int value = 0, bool exposed = false, Marking marked = Marking::Blank);
 	~Box();
 
 	bool exposed();
 	int value();
+	void setValue(int value);
 	Marking marked();
 
 	void expose();

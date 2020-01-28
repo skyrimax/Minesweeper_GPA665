@@ -42,12 +42,16 @@ public:
 	void mark(Coordinates pos);
 
 	void boxExplored();
+
+	void initialiseNeighbors();
+	void initialiseMines();
 	
 private:
 	void evaluateState();
 
 	Grid<Box*>* m_field;
 	Vector<Box*>* m_mines;
+
 	State m_gameState;
 
 	int m_nbBowUnexplored;

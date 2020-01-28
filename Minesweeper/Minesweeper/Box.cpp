@@ -33,6 +33,11 @@ int Box::value()
 	return m_value;
 }
 
+void Box::setValue(int value)
+{
+	m_value = value;
+}
+
 Box::Marking Box::marked()
 {
 	return m_marked;

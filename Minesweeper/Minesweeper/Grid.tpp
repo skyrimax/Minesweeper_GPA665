@@ -184,7 +184,7 @@ template<class T>
 T & Grid<T>::at(size_type row, size_type col)
 {
 	if (row < m_nbRows && col < m_nbCols) {
-		return (*m_data)[row][col];
+		return m_data->at(row)->at(col);
 	}
 	else {
 		throw std::out_of_range("vector::_M_range_check");

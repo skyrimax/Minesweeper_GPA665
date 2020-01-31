@@ -21,7 +21,7 @@ public:
 	Grid<T>& operator=(Grid<T>&& grid);
 
 	//Capacity related member functions
-	Vector<size_type>& size();
+	Vector<size_type> size();
 	void resize(size_type nbRows, size_type nbCols);
 	void resize(size_type nbRows, size_type nbCols, T& val);
 	bool empty();

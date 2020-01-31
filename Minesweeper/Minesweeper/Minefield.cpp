@@ -2,6 +2,31 @@
 #include <random>
 #include <immintrin.h>
 
+double Minefield::difficultyToDouble(DifficultyLevel diff)
+{
+	switch (diff)
+	{
+	case Minefield::DifficultyLevel::TresFacile:
+		return 0.05;
+		break;
+	case Minefield::DifficultyLevel::Facile:
+		return 0.10;
+		break;
+	case Minefield::DifficultyLevel::Moyen:
+		return 0.15;
+		break;
+	case Minefield::DifficultyLevel::Difficile:
+		return 0.20;
+		break;
+	case Minefield::DifficultyLevel::TresDifficile:
+		return 0.25;
+		break;
+	default:
+		return 0;
+		break;
+	}
+}
+
 Minefield::Minefield()
 {
 	m_field = new Grid<Box*>;
@@ -40,27 +65,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 	m_gameState = State::InGame;
 	m_nbBowUnexplored = nbRows * nbCols;
 
-	switch (diff)
-	{
-	case Minefield::DifficultyLevel::TresFacile:
-		m_nbMines = nbRows * nbCols*0.05;
-		break;
-	case Minefield::DifficultyLevel::Facile:
-		m_nbMines = nbRows * nbCols*0.10;
-		break;
-	case Minefield::DifficultyLevel::Moyen:
-		m_nbMines = nbRows * nbCols*0.15;
-		break;
-	case Minefield::DifficultyLevel::Difficile:
-		m_nbMines = nbRows * nbCols*0.20;
-		break;
-	case Minefield::DifficultyLevel::TresDifficile:
-		m_nbMines = nbRows * nbCols*0.25;
-		break;
-	default:
-		m_nbMines = 0;
-		break;
-	}
+	m_nbMines = nbRows * nbCols*difficultyToDouble(diff);
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
@@ -150,6 +155,40 @@ void Minefield::boxExplored()
 
 void Minefield::initialiseNeighbors()
 {
+	Vector<size_type> size = m_field->size();
+
+	for (int i = 0; i < size[0]; ++i) {
+		for (int j = 0; j < size[1]; ++j) {
+			m_field->at(i, j)->clearNeighbors();
+
+			if (i > 0) {
+				m_field->at(i, j)->addNeighbors(m_field->at(i - 1, j));
+			}
+			if (i > 0 && j>0) {
+				m_field->at(i, j)->addNeighbors(m_field->at(i - 1, j - 1));
+			}
+			if (j > 0 && i+1 < size[1]) {
+				m_field->at(i, j)->addNeighbors(m_field->at(i - 1, j + 1));
+			}
+			if (j > 0) {
+				m_field->at(i, j)->addNeighbors(m_field->at(i, j - 1));
+			}
+			if (j+1 < size[1]) {
+				m_field->at(i, j)->addNeighbors(m_field->at(i, j + 1));
+			}
+			if (i + 1 < size[0]) {
+				m_field->at(i, j)->addNeighbors(m_field->at(i + 1, j));
+			}
+			if (i + 1 < size[0] && j > 0) {
+				m_field->at(i, j)->addNeighbors(m_field->at(i + 1, j - 1));
+			}
+			if (i + 1 < size[0] && j+1 < size[1]) {
+				m_field->at(i, j)->addNeighbors(m_field->at(i + 1, j + 1));
+			}
+
+			m_field->at(i, j)->initialiseMines();
+		}
+	}
 }
 
 void Minefield::initialiseMines()

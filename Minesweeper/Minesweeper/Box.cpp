@@ -50,7 +50,7 @@ void Box::expose()
 		m_minefield->boxExplored();
 
 		if (m_value == 0) {
-			for (int i; i < m_neighbors.size(); ++i) {
+			for (int i=0; i < m_neighbors.size(); ++i) {
 				m_neighbors[i]->expose();
 			}
 		}

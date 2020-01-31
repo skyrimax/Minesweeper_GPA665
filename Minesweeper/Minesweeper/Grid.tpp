@@ -20,10 +20,10 @@ Grid<T>::Grid(size_type nbRows, size_type nbCols)
 	m_nbRows = nbRows;
 	m_nbCols = nbCols;
 
-	m_data=new Vector<Vector<T*>>(nbRows);
+	m_data=new Vector<Vector<T>*>(nbRows);
 
 	for (int i = 0; i < nbRows; ++i) {
-		m_data->at(1) = new Vector<T*>(nbCols);
+		m_data->at(1) = new Vector<T>(nbCols);
 	}
 }
 
@@ -107,7 +107,7 @@ Grid<T>& Grid<T>::operator=(Grid<T>&& grid)
 }
 
 template<class T>
- Vector<typename Grid<T>::size_type>& Grid<T>::size()
+ Vector<typename Grid<T>::size_type> Grid<T>::size()
 {
 	Vector<size_type> sizeToReturn=Vector<size_type>(2);
 

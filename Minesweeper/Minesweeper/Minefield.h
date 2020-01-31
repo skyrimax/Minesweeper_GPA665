@@ -17,6 +17,7 @@ public:
 		Difficile,
 		TresDifficile
 	};
+	static double difficultyToDouble(DifficultyLevel diff);
 
 	enum class UIType {
 		Synchronous,

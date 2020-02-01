@@ -1,11 +1,16 @@
 #pragma once
 
+#include <QGraphicsScene>
+
 #include"Grid.h"
 #include"Box.h"
 #include"Coordinates.h"
 
-class Minefield
+class Minefield:QGraphicsScene
 {
+
+	Q_OBJECT
+
 public:
 	//Type to indicate size of container
 	typedef unsigned int size_type;

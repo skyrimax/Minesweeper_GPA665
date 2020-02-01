@@ -1,10 +1,12 @@
 #pragma once
 
+#include <QGraphicsPixmapItem>
+
 #include "Vector.h"
 
 class Minefield;
 
-class Box
+class Box:QGraphicsPixmapItem
 {
 public:
 	enum class Marking {
@@ -38,5 +40,7 @@ private:
 	Minefield* m_minefield;
 
 	Vector<Box*> m_neighbors;
+
+	QPixmap m_sprite;
 };
 

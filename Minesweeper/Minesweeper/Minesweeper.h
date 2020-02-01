@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_Minesweeper.h"
+#include "Minesweeper.h"
 
 class Minesweeper : public QMainWindow
 {
@@ -12,4 +13,5 @@ public:
 
 private:
 	Ui::MinesweeperClass ui;
+	Minesweeper* m_game;
 };

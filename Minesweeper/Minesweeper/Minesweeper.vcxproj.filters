@@ -42,6 +42,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Minefield.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="Minesweeper.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -63,13 +66,10 @@
     <ClInclude Include="Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Minefield.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Coordinates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

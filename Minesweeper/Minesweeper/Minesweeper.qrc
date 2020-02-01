@@ -1,4 +1,27 @@
 <RCC>
-    <qresource prefix="Minesweeper">
+    <qresource prefix="/Minesweeper">
+        <file>sprites/block.png</file>
+        <file>sprites/dead.png</file>
+        <file>sprites/eight.png</file>
+        <file>sprites/empty.png</file>
+        <file>sprites/five.png</file>
+        <file>sprites/flagged.png</file>
+        <file>sprites/four.png</file>
+        <file>sprites/mine.png</file>
+        <file>sprites/mine_exploded.png</file>
+        <file>sprites/mine_wrong_guess.png</file>
+        <file>sprites/minesweeper_logo.png</file>
+        <file>sprites/minesweeper_logo_16x16.png</file>
+        <file>sprites/one.png</file>
+        <file>sprites/question_mark.png</file>
+        <file>sprites/question_mark_pressed.png</file>
+        <file>sprites/seven.png</file>
+        <file>sprites/six.png</file>
+        <file>sprites/smile.png</file>
+        <file>sprites/smile_pressed.png</file>
+        <file>sprites/suprised.png</file>
+        <file>sprites/three.png</file>
+        <file>sprites/two.png</file>
+        <file>sprites/victory.png</file>
     </qresource>
 </RCC>

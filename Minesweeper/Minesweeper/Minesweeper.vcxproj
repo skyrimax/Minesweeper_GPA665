@@ -107,7 +107,7 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="Coordinates.h" />
     <ClInclude Include="Grid.h" />
-    <ClInclude Include="Minefield.h" />
+    <QtMoc Include="Minefield.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>

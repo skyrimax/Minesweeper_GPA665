@@ -6,108 +6,137 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>231</width>
-    <height>372</height>
+    <width>271</width>
+    <height>341</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Minesweeper</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>sprites/minesweeper_logo.png</normaloff>sprites/minesweeper_logo.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="Canada"/>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QFrame" name="frame_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>211</width>
-      <height>331</height>
-     </rect>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::Panel</enum>
+    <property name="topMargin">
+     <number>0</number>
     </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+    <property name="rightMargin">
+     <number>0</number>
     </property>
-    <property name="lineWidth">
-     <number>3</number>
+    <property name="bottomMargin">
+     <number>0</number>
     </property>
-    <widget class="QGraphicsView" name="graphicsView">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>191</width>
-       <height>251</height>
-      </rect>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Panel</enum>
-     </property>
-     <property name="lineWidth">
-      <number>3</number>
-     </property>
-    </widget>
-    <widget class="QFrame" name="frame">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>191</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Panel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Sunken</enum>
-     </property>
-     <property name="lineWidth">
-      <number>3</number>
-     </property>
-     <widget class="QLCDNumber" name="lcdNumber">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>64</width>
-        <height>23</height>
-       </rect>
+    <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="frameShape">
+       <enum>QFrame::Panel</enum>
       </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="lineWidth">
+       <number>2</number>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::Panel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLCDNumber" name="lcdNumber"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="icon">
+             <iconset resource="Minesweeper.qrc">
+              <normaloff>:/Minesweeper/sprites/smile.png</normaloff>:/Minesweeper/sprites/smile.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="lcdNumber_2"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGraphicsView" name="graphicsView">
+         <property name="frameShape">
+          <enum>QFrame::Panel</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
-     <widget class="QLCDNumber" name="lcdNumber_2">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>10</y>
-        <width>64</width>
-        <height>23</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>10</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>231</width>
+     <width>271</width>
      <height>21</height>
     </rect>
    </property>
@@ -117,17 +146,24 @@
     </property>
     <addaction name="actionNew_game"/>
     <addaction name="separator"/>
-    <addaction name="actionStatistics"/>
-    <addaction name="actionOptions"/>
-    <addaction name="actionChange_Apperance"/>
+    <addaction name="actionBeginner_2"/>
+    <addaction name="actionIntermediairy"/>
+    <addaction name="actionExpert"/>
+    <addaction name="actionHard"/>
+    <addaction name="actionSuper_Hard"/>
+    <addaction name="separator"/>
+    <addaction name="actionMarks"/>
+    <addaction name="separator"/>
+    <addaction name="actionBet_time"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>?</string>
     </property>
     <addaction name="actionHelp"/>
+    <addaction name="actionAbout_Minesweeper"/>
    </widget>
    <addaction name="menuGame"/>
    <addaction name="menuHelp"/>
@@ -175,6 +211,75 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionBeginner">
+   <property name="text">
+    <string>Beginner</string>
+   </property>
+  </action>
+  <action name="actionBeginner_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Super Easy</string>
+   </property>
+  </action>
+  <action name="actionIntermediairy">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Easy</string>
+   </property>
+  </action>
+  <action name="actionExpert">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Medium</string>
+   </property>
+  </action>
+  <action name="actionHard">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hard</string>
+   </property>
+  </action>
+  <action name="actionSuper_Hard">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Super Hard</string>
+   </property>
+  </action>
+  <action name="actionBet_time">
+   <property name="text">
+    <string>Best times...</string>
+   </property>
+  </action>
+  <action name="actionMarks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Marks (?)</string>
+   </property>
+  </action>
+  <action name="actionAbout_Minesweeper">
+   <property name="text">
+    <string>About Minesweeper</string>
    </property>
   </action>
  </widget>

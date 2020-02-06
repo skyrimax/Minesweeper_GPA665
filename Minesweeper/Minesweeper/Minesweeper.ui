@@ -117,12 +117,15 @@
         </widget>
        </item>
        <item>
-        <widget class="QGraphicsView" name="graphicsView">
+        <widget class="QGraphicsView" name="minefieldView">
          <property name="frameShape">
           <enum>QFrame::Panel</enum>
          </property>
          <property name="lineWidth">
           <number>2</number>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
          </property>
         </widget>
        </item>
@@ -144,17 +147,17 @@
     <property name="title">
      <string>Game</string>
     </property>
-    <addaction name="actionNew_game"/>
+    <addaction name="actionNewGame"/>
     <addaction name="separator"/>
-    <addaction name="actionBeginner_2"/>
-    <addaction name="actionIntermediairy"/>
-    <addaction name="actionExpert"/>
+    <addaction name="actionSuperEasy"/>
+    <addaction name="actionEasy"/>
+    <addaction name="actionMedium"/>
     <addaction name="actionHard"/>
-    <addaction name="actionSuper_Hard"/>
+    <addaction name="actionSuperHard"/>
     <addaction name="separator"/>
     <addaction name="actionMarks"/>
     <addaction name="separator"/>
-    <addaction name="actionBet_time"/>
+    <addaction name="actionBestTime"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -168,7 +171,7 @@
    <addaction name="menuGame"/>
    <addaction name="menuHelp"/>
   </widget>
-  <action name="actionNew_game">
+  <action name="actionNewGame">
    <property name="text">
     <string>New Game</string>
    </property>
@@ -218,7 +221,7 @@
     <string>Beginner</string>
    </property>
   </action>
-  <action name="actionBeginner_2">
+  <action name="actionSuperEasy">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -229,7 +232,7 @@
     <string>Super Easy</string>
    </property>
   </action>
-  <action name="actionIntermediairy">
+  <action name="actionEasy">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -237,7 +240,7 @@
     <string>Easy</string>
    </property>
   </action>
-  <action name="actionExpert">
+  <action name="actionMedium">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -253,7 +256,7 @@
     <string>Hard</string>
    </property>
   </action>
-  <action name="actionSuper_Hard">
+  <action name="actionSuperHard">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -261,7 +264,7 @@
     <string>Super Hard</string>
    </property>
   </action>
-  <action name="actionBet_time">
+  <action name="actionBestTime">
    <property name="text">
     <string>Best times...</string>
    </property>

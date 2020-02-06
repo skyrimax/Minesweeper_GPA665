@@ -1,8 +1,9 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QActionGroup>
 #include "ui_Minesweeper.h"
-#include "Minesweeper.h"
+#include "Minefield.h"
 
 class Minesweeper : public QMainWindow
 {
@@ -13,5 +14,10 @@ public:
 
 private:
 	Ui::MinesweeperClass ui;
-	Minesweeper* m_game;
+	Minefield* m_game;
+	QActionGroup* difficultyGroup;
+
+	Minefield::DifficultyLevel diff;
+	int nbRows;
+	int nbCols;
 };

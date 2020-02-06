@@ -28,7 +28,10 @@ double Minefield::difficultyToDouble(DifficultyLevel diff)
 }
 
 Minefield::Minefield()
+	: QGraphicsScene()
 {
+	Box* tile;
+
 	m_field = new Grid<Box*>;
 	m_mines = new Vector<Box*>;
 
@@ -36,11 +39,18 @@ Minefield::Minefield()
 	m_nbBowUnexplored = 1;
 	m_nbMines = 0;
 
-	m_field->at(0, 0) = new Box(this);
+	tile = new Box(this);
+	m_field->at(0, 0) = tile;
+	addItem(tile);
+
+	
 }
 
 Minefield::Minefield(size_type nbRows, size_type nbCols)
+	: QGraphicsScene()
 {
+	Box* tile;
+
 	m_field = new Grid<Box*>(nbRows, nbCols);
 	m_mines = new Vector<Box*>;
 
@@ -50,14 +60,18 @@ Minefield::Minefield(size_type nbRows, size_type nbCols)
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
-			m_field->at(i, j) = new Box(this);
+			tile = new Box(this);
+			m_field->at(i, j) = tile;
+			addItem(tile);
 		}
 	}
 }
 
 
 Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
+	: QGraphicsScene()
 {
+	Box* tile;
 
 	m_field = new Grid<Box*>(nbRows, nbCols);
 	m_mines = new Vector<Box*>;
@@ -69,7 +83,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
-			m_field->at(i, j) = new Box(this);
+			tile = new Box(this);
+			m_field->at(i, j) = tile;
+			addItem(tile);
 		}
 	}
 
@@ -78,7 +94,10 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 }
 
 Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
+	: QGraphicsScene()
 {
+	Box* tile;
+
 	m_field = new Grid<Box*>(nbRows, nbCols);
 	m_mines = new Vector<Box*>;
 
@@ -89,7 +108,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
-			m_field->at(i, j) = new Box(this);
+			tile = new Box(this);
+			m_field->at(i, j) = tile;
+			addItem(tile);
 		}
 	}
 
@@ -98,7 +119,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 }
 
 Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
+	: QGraphicsScene()
 {
+	Box* tile;
 	m_field = new Grid<Box*>(nbRows, nbCols);
 	m_mines = new Vector<Box*>;
 
@@ -109,7 +132,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
-			m_field->at(i, j) = new Box(this);
+			tile = new Box(this);
+			m_field->at(i, j) = tile;
+			addItem(tile);
 		}
 	}
 

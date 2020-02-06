@@ -6,8 +6,10 @@
 
 class Minefield;
 
-class Box:QGraphicsPixmapItem
+class Box:public QObject, public QGraphicsPixmapItem
 {
+	Q_OBJECT
+
 public:
 	enum class Marking {
 		Blank,
@@ -32,9 +34,22 @@ public:
 
 	void initialiseMines();
 
+signals:
+	void clicked();
+	void released();
+
+protected:
+	// Events grabbers
+	void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
+	void mousePressEvent(QGraphicsSceneMouseEvent* event);
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+	void setImage();
+
 private:
 	int m_value;
 	bool m_exposed;
+	bool m_clicked;
 	Marking m_marked;
 
 	Minefield* m_minefield;

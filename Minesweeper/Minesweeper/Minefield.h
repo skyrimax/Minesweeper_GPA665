@@ -6,7 +6,7 @@
 #include"Box.h"
 #include"Coordinates.h"
 
-class Minefield:QGraphicsScene
+class Minefield:public QGraphicsScene
 {
 
 	Q_OBJECT

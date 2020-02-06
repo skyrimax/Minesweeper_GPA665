@@ -12,6 +12,7 @@ Grid<T>::Grid()
 	m_nbRows = 1;
 
 	m_data = new Vector<Vector<T>*>;
+	m_data->at(0) = new Vector<T>;
 }
 
 template<class T>
@@ -23,7 +24,7 @@ Grid<T>::Grid(size_type nbRows, size_type nbCols)
 	m_data=new Vector<Vector<T>*>(nbRows);
 
 	for (int i = 0; i < nbRows; ++i) {
-		m_data->at(1) = new Vector<T>(nbCols);
+		m_data->at(i) = new Vector<T>(nbCols);
 	}
 }
 
@@ -36,7 +37,7 @@ Grid<T>::Grid(size_type nbRows, size_type nbCols, const T & val)
 	m_data = new Vector<Vector<T*>>(nbRows);
 
 	for (int i = 0; i < nbRows; ++i) {
-		m_data->at(1) = new Vector<T*>(nbCols, val);
+		m_data->at(i) = new Vector<T*>(nbCols, val);
 	}
 }
 

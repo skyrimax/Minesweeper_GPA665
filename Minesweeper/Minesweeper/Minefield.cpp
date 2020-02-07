@@ -6,19 +6,19 @@ double Minefield::difficultyToDouble(DifficultyLevel diff)
 {
 	switch (diff)
 	{
-	case Minefield::DifficultyLevel::TresFacile:
+	case Minefield::DifficultyLevel::SuperEasy:
 		return 0.05;
 		break;
-	case Minefield::DifficultyLevel::Facile:
+	case Minefield::DifficultyLevel::Easy:
 		return 0.10;
 		break;
-	case Minefield::DifficultyLevel::Moyen:
+	case Minefield::DifficultyLevel::Medium:
 		return 0.15;
 		break;
-	case Minefield::DifficultyLevel::Difficile:
+	case Minefield::DifficultyLevel::Hard:
 		return 0.20;
 		break;
-	case Minefield::DifficultyLevel::TresDifficile:
+	case Minefield::DifficultyLevel::SuperHard:
 		return 0.25;
 		break;
 	default:
@@ -39,7 +39,7 @@ Minefield::Minefield()
 	m_nbBowUnexplored = 1;
 	m_nbMines = 0;
 
-	tile = new Box(this);
+	tile = new Box(this, 0, 0);
 	m_field->at(0, 0) = tile;
 	addItem(tile);
 
@@ -55,12 +55,12 @@ Minefield::Minefield(size_type nbRows, size_type nbCols)
 	m_mines = new Vector<Box*>;
 
 	m_gameState = State::InGame;
-	m_nbBowUnexplored = nbRows*nbCols;
 	m_nbMines = 0;
+	m_nbBowUnexplored = nbRows*nbCols-m_nbMines;
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
-			tile = new Box(this);
+			tile = new Box(this, i, j);
 			m_field->at(i, j) = tile;
 			addItem(tile);
 		}
@@ -73,17 +73,16 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 {
 	Box* tile;
 
+	m_gameState = State::InGame;
+	m_nbMines = nbRows * nbCols*difficultyToDouble(diff);
+	m_nbBowUnexplored = nbRows * nbCols-m_nbMines;
+
 	m_field = new Grid<Box*>(nbRows, nbCols);
 	m_mines = new Vector<Box*>;
 
-	m_gameState = State::InGame;
-	m_nbBowUnexplored = nbRows * nbCols;
-
-	m_nbMines = nbRows * nbCols*difficultyToDouble(diff);
-
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
-			tile = new Box(this);
+			tile = new Box(this, i, j);
 			m_field->at(i, j) = tile;
 			addItem(tile);
 		}
@@ -108,7 +107,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
-			tile = new Box(this);
+			tile = new Box(this, i, j);
 			m_field->at(i, j) = tile;
 			addItem(tile);
 		}
@@ -132,7 +131,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
-			tile = new Box(this);
+			tile = new Box(this, i, j);
 			m_field->at(i, j) = tile;
 			addItem(tile);
 		}
@@ -192,7 +191,7 @@ void Minefield::initialiseNeighbors()
 			if (i > 0 && j>0) {
 				m_field->at(i, j)->addNeighbors(m_field->at(i - 1, j - 1));
 			}
-			if (j > 0 && i+1 < size[1]) {
+			if (i > 0 && j+1 < size[1]) {
 				m_field->at(i, j)->addNeighbors(m_field->at(i - 1, j + 1));
 			}
 			if (j > 0) {
@@ -236,12 +235,18 @@ void Minefield::initialiseMines()
 	int row;
 	int col;
 
-	for (int i = 0; i < m_nbMines; ++i) {
+	m_mines->clear();
+
+	int i = 0;
+	while(i < m_nbMines) {
 		row = xRandDist(gen);
 		col = yRandDist(gen);
 
-		m_field->at(row, col)->setValue(-1);
-		m_mines->push_back(m_field->at(row, col));
+		if (m_field->at(row, col)->value() != -1) {
+			m_field->at(row, col)->setValue(-1);
+			m_mines->push_back(m_field->at(row, col));
+			i++;
+		}
 	}
 }
 

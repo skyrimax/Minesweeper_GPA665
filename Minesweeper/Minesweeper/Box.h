@@ -18,7 +18,7 @@ public:
 	};
 
 	Box();
-	Box(Minefield* minefield, int value = 0, bool exposed = false, Marking marked = Marking::Blank);
+	Box(Minefield* minefield, int row, int col, int value = 0, bool exposed = false, Marking marked = Marking::Blank);
 	~Box();
 
 	bool exposed();

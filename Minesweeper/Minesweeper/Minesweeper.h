@@ -12,6 +12,15 @@ class Minesweeper : public QMainWindow
 public:
 	Minesweeper(QWidget *parent = Q_NULLPTR);
 
+public slots:
+	void newGame();
+	void superEasyGame();
+	void easyGame();
+	void mediumGame();
+	void hardGame();
+	void superHardGame();
+	void customGame();
+
 private:
 	Ui::MinesweeperClass ui;
 	Minefield* m_game;

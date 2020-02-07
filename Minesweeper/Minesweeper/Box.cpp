@@ -15,7 +15,7 @@ Box::Box()
 	setImage();
 }
 
-Box::Box(Minefield* minefield, int value, bool exposed, Marking marked)
+Box::Box(Minefield* minefield, int row, int col, int value, bool exposed, Marking marked)
 	: QGraphicsPixmapItem()
 {
 	m_value = value;
@@ -26,6 +26,8 @@ Box::Box(Minefield* minefield, int value, bool exposed, Marking marked)
 	setAcceptHoverEvents(true);
 
 	setImage();
+
+	setPos(row*m_sprite.height(), col*m_sprite.width());
 }
 
 
@@ -97,7 +99,7 @@ void Box::initialiseMines()
 	m_value = 0;
 
 	for (int i = 0; i < m_neighbors.size(); ++i) {
-		if (m_neighbors[i]->m_value = -1) {
+		if (m_neighbors[i]->m_value == -1) {
 			++m_value;
 		}
 	}

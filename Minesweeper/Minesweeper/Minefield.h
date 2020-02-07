@@ -16,11 +16,11 @@ public:
 	typedef unsigned int size_type;
 
 	enum class DifficultyLevel {
-		TresFacile,
-		Facile,
-		Moyen,
-		Difficile,
-		TresDifficile
+		SuperEasy,
+		Easy,
+		Medium,
+		Hard,
+		SuperHard
 	};
 	static double difficultyToDouble(DifficultyLevel diff);
 

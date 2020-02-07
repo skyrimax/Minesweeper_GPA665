@@ -18,7 +18,7 @@ template<class T>
 Vector<T>::Vector(Vector<T>::size_type n)
 {
 	//Determining necessary capacity to store n elements
-	size_type m_capacity = pow(2, ceil(log2((double)n)));
+	m_capacity = pow(2, ceil(log2((double)n)));
 
 	//Allocating the array of necessary capacity
 	m_data = new T[m_capacity];
@@ -31,7 +31,7 @@ template<class T>
 Vector<T>::Vector(Vector<T>::size_type n, T& val)
 {
 	//Determining necessary capacity to store n elements
-	size_type m_capacity = pow(2, ceil(log2((double)n)));
+	m_capacity = pow(2, ceil(log2((double)n)));
 
 	//Allocating the array of necessary capacity
 	m_data = new T[m_capacity];

@@ -62,7 +62,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLCDNumber" name="lcdNumber"/>
+           <widget class="QLCDNumber" name="lcdNbBombs"/>
           </item>
           <item>
            <spacer name="horizontalSpacer">
@@ -78,7 +78,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="newGameButton">
             <property name="icon">
              <iconset resource="Minesweeper.qrc">
               <normaloff>:/Minesweeper/sprites/smile.png</normaloff>:/Minesweeper/sprites/smile.png</iconset>
@@ -111,7 +111,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLCDNumber" name="lcdNumber_2"/>
+           <widget class="QLCDNumber" name="lcdTime"/>
           </item>
          </layout>
         </widget>
@@ -154,6 +154,7 @@
     <addaction name="actionMedium"/>
     <addaction name="actionHard"/>
     <addaction name="actionSuperHard"/>
+    <addaction name="actionCustom"/>
     <addaction name="separator"/>
     <addaction name="actionMarks"/>
     <addaction name="separator"/>
@@ -182,30 +183,6 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="actionStatistics">
-   <property name="text">
-    <string>Statistics</string>
-   </property>
-   <property name="shortcut">
-    <string>F4</string>
-   </property>
-  </action>
-  <action name="actionOptions">
-   <property name="text">
-    <string>Options</string>
-   </property>
-   <property name="shortcut">
-    <string>F5</string>
-   </property>
-  </action>
-  <action name="actionChange_Apperance">
-   <property name="text">
-    <string>Change Appearance</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+R</string>
-   </property>
-  </action>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
@@ -214,11 +191,6 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
-   </property>
-  </action>
-  <action name="actionBeginner">
-   <property name="text">
-    <string>Beginner</string>
    </property>
   </action>
   <action name="actionSuperEasy">
@@ -283,6 +255,14 @@
   <action name="actionAbout_Minesweeper">
    <property name="text">
     <string>About Minesweeper</string>
+   </property>
+  </action>
+  <action name="actionCustom">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Custom...</string>
    </property>
   </action>
  </widget>

@@ -10,7 +10,7 @@ Vector<T>::Vector()
 {
 	//Create an array on one element and initialize internal attributes
 	m_data = new T[1];
-	m_size = 1;
+	m_size = 0;
 	m_capacity = 1;
 }
 

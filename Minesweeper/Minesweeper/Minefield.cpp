@@ -43,7 +43,8 @@ Minefield::Minefield()
 	m_field->at(0, 0) = tile;
 	addItem(tile);
 
-	
+	initialiseMines();
+	initialiseNeighbors();
 }
 
 Minefield::Minefield(size_type nbRows, size_type nbCols)
@@ -65,6 +66,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols)
 			addItem(tile);
 		}
 	}
+
+	initialiseMines();
+	initialiseNeighbors();
 }
 
 
@@ -88,8 +92,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 		}
 	}
 
-	initialiseNeighbors();
 	initialiseMines();
+	initialiseNeighbors();
 }
 
 Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
@@ -113,8 +117,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 		}
 	}
 
-	initialiseNeighbors();
 	initialiseMines();
+	initialiseNeighbors();
 }
 
 Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
@@ -137,8 +141,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
 		}
 	}
 
-	initialiseNeighbors();
 	initialiseMines();
+	initialiseNeighbors();
 }
 
 Minefield::~Minefield()

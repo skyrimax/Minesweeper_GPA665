@@ -51,6 +51,12 @@ public:
 
 	void initialiseNeighbors();
 	void initialiseMines();
+
+signals:
+	void loss();
+	void victory();
+
+public slots:
 	
 private:
 	void evaluateState();

@@ -36,12 +36,11 @@ public:
 
 signals:
 	void clicked();
+	void clickedOnBomb();
 	void released();
 
 protected:
 	// Events grabbers
-	void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
-	void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
 	void mousePressEvent(QGraphicsSceneMouseEvent* event);
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
 	void setImage();
@@ -49,7 +48,6 @@ protected:
 private:
 	int m_value;
 	bool m_exposed;
-	bool m_clicked;
 	Marking m_marked;
 
 	Minefield* m_minefield;

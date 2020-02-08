@@ -66,6 +66,12 @@ void Box::expose()
 				m_neighbors[i]->expose();
 			}
 		}
+		else if (m_value == -1) {
+			m_sprite.load(":/Minesweeper/sprites/mine_exploded.png");
+			setPixmap(m_sprite);
+			emit clickedOnBomb();
+			return;
+		}
 	}
 
 	setImage();
@@ -96,26 +102,14 @@ void Box::clearNeighbors()
 
 void Box::initialiseMines()
 {
-	m_value = 0;
+	if (m_value != -1) {
+		m_value = 0;
 
-	for (int i = 0; i < m_neighbors.size(); ++i) {
-		if (m_neighbors[i]->m_value == -1) {
-			++m_value;
+		for (int i = 0; i < m_neighbors.size(); ++i) {
+			if (m_neighbors[i]->m_value == -1) {
+				++m_value;
+			}
 		}
-	}
-}
-
-void Box::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
-{
-	
-}
-
-void Box::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
-{
-	if (m_clicked) {
-		m_clicked = false;
-		m_sprite.load(":/Minesweeper/sprites/block.png");
-		setPixmap(m_sprite);
 	}
 }
 
@@ -126,18 +120,17 @@ void Box::mousePressEvent(QGraphicsSceneMouseEvent * event)
 	case Qt::LeftButton:
 		m_sprite.load(":/Minesweeper/sprites/empty.png");
 		setPixmap(m_sprite);
-		m_clicked = true;
 		emit clicked();
 		break;
 	case Qt::RightButton:
 		mark();
+		setImage();
 		break;
-	case Qt::MidButton:
+	/**case Qt::MidButton:
 		m_sprite.load(":/Minesweeper/sprites/empty.png");
 		setPixmap(m_sprite);
-		m_clicked = true;
 		emit clicked();
-		break;
+		break;**/
 	default:
 		break;
 	}
@@ -148,18 +141,15 @@ void Box::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 	switch (event->button())
 	{
 	case Qt::LeftButton:
-		m_clicked = false;
 		expose();
 		emit released();
 		break;
 	case Qt::RightButton:
-		mark();
 		break;
-	case Qt::MidButton:
-		m_clicked = false;
+	/**case Qt::MidButton:
 		// Implement a function to explore every tiles around this one
 		// if there is time
-		break;
+		break;**/
 	default:
 		break;
 	}

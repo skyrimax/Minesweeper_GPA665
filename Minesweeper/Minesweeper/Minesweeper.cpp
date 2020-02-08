@@ -57,7 +57,7 @@ void Minesweeper::easyGame()
 	nbCols = 9;
 	diff = Minefield::DifficultyLevel::Easy;
 
-	objectName();
+	newGame();
 }
 
 void Minesweeper::mediumGame()
@@ -71,8 +71,8 @@ void Minesweeper::mediumGame()
 
 void Minesweeper::hardGame()
 {
-	nbRows = 16;
-	nbCols = 30;
+	nbRows = 30;
+	nbCols = 16;
 	diff = Minefield::DifficultyLevel::Hard;
 
 	newGame();
@@ -80,8 +80,8 @@ void Minesweeper::hardGame()
 
 void Minesweeper::superHardGame()
 {
-	nbRows = 16;
-	nbCols = 30;
+	nbRows = 30;
+	nbCols = 16;
 	diff = Minefield::DifficultyLevel::SuperHard;
 
 	newGame();
@@ -89,5 +89,5 @@ void Minesweeper::superHardGame()
 
 void Minesweeper::customGame()
 {
-
+	newGame();
 }

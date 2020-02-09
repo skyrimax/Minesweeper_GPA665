@@ -58,6 +58,7 @@ signals:
 
 public slots:
 	void evaluateState();
+	void endOfGame();
 	
 private:
 	Grid<Box*>* m_field;

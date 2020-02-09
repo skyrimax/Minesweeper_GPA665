@@ -114,6 +114,11 @@ void Minesweeper::victory()
 
 void Minesweeper::loss()
 {
+	QPixmap image;
+	image.load(":/Minesweeper/sprites/dead.png");
+	QIcon icon(image);
+	ui.newGameButton->setIcon(icon);
+	ui.newGameButton->setIconSize(image.rect().size());
 }
 
 void Minesweeper::minimalSize()

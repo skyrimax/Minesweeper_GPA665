@@ -57,7 +57,7 @@ Box::Marking Box::marked()
 
 void Box::expose()
 {
-	if (!m_exposed && m_marked == Marking::Blank) {
+	if (!m_exposed && m_marked != Marking::Flag) {
 		m_exposed = true;
 		m_minefield->boxExplored();
 
@@ -90,6 +90,12 @@ void Box::mark()
 	}
 }
 
+void Box::revealForEndOfGame()
+{
+	m_exposed = true;
+	setImage();
+}
+
 void Box::addNeighbors(Box * neighbor)
 {
 	m_neighbors.push_back(neighbor);
@@ -115,12 +121,18 @@ void Box::initialiseMines()
 
 void Box::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
+	if (m_minefield->gameState() != Minefield::State::InGame || m_exposed) {
+		return;
+	}
+
 	switch (event->button())
 	{
 	case Qt::LeftButton:
-		m_sprite.load(":/Minesweeper/sprites/empty.png");
-		setPixmap(m_sprite);
-		emit clicked();
+		if (m_marked != Marking::Flag) {
+			m_sprite.load(":/Minesweeper/sprites/empty.png");
+			setPixmap(m_sprite);
+			emit clicked();
+		}
 		break;
 	case Qt::RightButton:
 		mark();
@@ -138,6 +150,10 @@ void Box::mousePressEvent(QGraphicsSceneMouseEvent * event)
 
 void Box::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 {
+	if (m_minefield->gameState() != Minefield::State::InGame) {
+		return;
+	}
+
 	switch (event->button())
 	{
 	case Qt::LeftButton:

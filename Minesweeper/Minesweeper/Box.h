@@ -28,6 +28,7 @@ public:
 
 	void expose();
 	void mark();
+	void revealForEndOfGame();
 
 	void addNeighbors(Box* neighbor);
 	void clearNeighbors();

@@ -45,6 +45,9 @@ Minefield::Minefield()
 
 	connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
 
+	connect(this, SIGNAL(victory()), this, SLOT(endOfGame()));
+	connect(this, SIGNAL(loss()), this, SLOT(endOfGame()));
+
 	initialiseMines();
 	initialiseNeighbors();
 }
@@ -70,6 +73,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols)
 			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
 		}
 	}
+
+	connect(this, SIGNAL(victory()), this, SLOT(endOfGame()));
+	connect(this, SIGNAL(loss()), this, SLOT(endOfGame()));
 
 	initialiseMines();
 	initialiseNeighbors();
@@ -98,6 +104,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 		}
 	}
 
+	connect(this, SIGNAL(victory()), this, SLOT(endOfGame()));
+	connect(this, SIGNAL(loss()), this, SLOT(endOfGame()));
+
 	initialiseMines();
 	initialiseNeighbors();
 }
@@ -125,6 +134,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 		}
 	}
 
+	connect(this, SIGNAL(victory()), this, SLOT(endOfGame()));
+	connect(this, SIGNAL(loss()), this, SLOT(endOfGame()));
+
 	initialiseMines();
 	initialiseNeighbors();
 }
@@ -151,6 +163,9 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
 		}
 	}
 
+	connect(this, SIGNAL(victory()), this, SLOT(endOfGame()));
+	connect(this, SIGNAL(loss()), this, SLOT(endOfGame()));
+
 	initialiseMines();
 	initialiseNeighbors();
 }
@@ -171,7 +186,7 @@ Minefield::~Minefield()
 
 Minefield::State Minefield::gameState()
 {
-	return State();
+	return m_gameState;
 }
 
 void Minefield::explore(Coordinates pos)
@@ -281,5 +296,16 @@ void Minefield::evaluateState()
 	}
 	else {
 		m_gameState = State::InGame;
+	}
+}
+
+void Minefield::endOfGame()
+{
+	Vector<size_type> size = m_field->size();
+
+	for (int i = 0; i < size[0]; ++i) {
+		for (int j = 0; j < size[1]; ++j) {
+			m_field->at(i, j)->revealForEndOfGame();
+		}
 	}
 }

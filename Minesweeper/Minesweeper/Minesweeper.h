@@ -21,7 +21,13 @@ public slots:
 	void superHardGame();
 	void customGame();
 
+	void victory();
+	void loss();
+
 private:
+	//UI size management
+	void minimalSize();
+
 	Ui::MinesweeperClass ui;
 	Minefield* m_game;
 	QActionGroup* difficultyGroup;

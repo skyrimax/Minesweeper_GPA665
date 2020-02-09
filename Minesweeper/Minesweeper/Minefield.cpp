@@ -43,6 +43,8 @@ Minefield::Minefield()
 	m_field->at(0, 0) = tile;
 	addItem(tile);
 
+	connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
+
 	initialiseMines();
 	initialiseNeighbors();
 }
@@ -64,6 +66,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols)
 			tile = new Box(this, i, j);
 			m_field->at(i, j) = tile;
 			addItem(tile);
+
+			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
 		}
 	}
 
@@ -89,6 +93,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 			tile = new Box(this, i, j);
 			m_field->at(i, j) = tile;
 			addItem(tile);
+
+			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
 		}
 	}
 
@@ -114,6 +120,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 			tile = new Box(this, i, j);
 			m_field->at(i, j) = tile;
 			addItem(tile);
+
+			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
 		}
 	}
 
@@ -138,6 +146,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
 			tile = new Box(this, i, j);
 			m_field->at(i, j) = tile;
 			addItem(tile);
+
+			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
 		}
 	}
 
@@ -260,12 +270,14 @@ void Minefield::evaluateState()
 		if (m_mines->at(i)->exposed()) {
 			m_gameState = State::Defeat;
 
+			emit loss();
 			return;
 		}
 	}
 
-	if (m_nbBowUnexplored == m_nbMines) {
+	if (!m_nbBowUnexplored) {
 		m_gameState = State::Victory;
+		emit victory();
 	}
 	else {
 		m_gameState = State::InGame;

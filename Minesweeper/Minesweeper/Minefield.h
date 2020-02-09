@@ -57,10 +57,9 @@ signals:
 	void victory();
 
 public slots:
+	void evaluateState();
 	
 private:
-	void evaluateState();
-
 	Grid<Box*>* m_field;
 	Vector<Box*>* m_mines;
 

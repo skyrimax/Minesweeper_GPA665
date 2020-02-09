@@ -27,6 +27,8 @@ Minesweeper::Minesweeper(QWidget *parent)
 	//Connecting the exit menu action to quitting the program
 	connect(ui.actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
+	
+
 	m_game = nullptr;
 	superEasyGame();
 }
@@ -37,9 +39,18 @@ void Minesweeper::newGame()
 		delete m_game;
 	}
 
+	QPixmap image;
+	image.load(":/Minesweeper/sprites/smile.png");
+	QIcon icon(image);
+	ui.newGameButton->setIcon(icon);
+	ui.newGameButton->setIconSize(image.rect().size());
+
 	m_game = new Minefield(nbRows, nbCols, diff);
 
-	ui.minefieldView->setScene(m_game);
+	connect(m_game, SIGNAL(victory()), this, SLOT(victory()));
+	connect(m_game, SIGNAL(loss()), this, SLOT(loss()));
+
+	minimalSize();
 }
 
 void Minesweeper::superEasyGame()
@@ -90,4 +101,30 @@ void Minesweeper::superHardGame()
 void Minesweeper::customGame()
 {
 	newGame();
+}
+
+void Minesweeper::victory()
+{
+	QPixmap image;
+	image.load(":/Minesweeper/sprites/victory.png");
+	QIcon icon(image);
+	ui.newGameButton->setIcon(icon);
+	ui.newGameButton->setIconSize(image.rect().size());
+}
+
+void Minesweeper::loss()
+{
+}
+
+void Minesweeper::minimalSize()
+{
+	//Widgets in main frame
+	ui.minefieldView->setScene(m_game);
+	ui.minefieldView->setFixedSize(16 * nbRows + 4, 16 * nbCols + 4);
+	ui.minefieldView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	ui.minefieldView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	ui.frame_2->adjustSize();
+
+	ui.centralWidget->adjustSize();
+	this->adjustSize();
 }

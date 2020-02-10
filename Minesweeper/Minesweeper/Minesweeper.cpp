@@ -27,8 +27,6 @@ Minesweeper::Minesweeper(QWidget *parent)
 	//Connecting the exit menu action to quitting the program
 	connect(ui.actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-	
-
 	m_game = nullptr;
 	superEasyGame();
 }
@@ -49,6 +47,9 @@ void Minesweeper::newGame()
 
 	connect(m_game, SIGNAL(victory()), this, SLOT(victory()));
 	connect(m_game, SIGNAL(loss()), this, SLOT(loss()));
+
+	//Connecting the Mark(?) menu action to the function enabling and disabling the use of ?
+	connect(ui.actionMarks, SIGNAL(triggered(bool)), m_game, SLOT(setQuestionMarkAvailability(bool)));
 
 	minimalSize();
 }

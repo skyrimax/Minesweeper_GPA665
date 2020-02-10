@@ -83,7 +83,12 @@ void Box::mark()
 		m_marked = Marking::Flag;
 	}
 	else if (m_marked == Marking::Flag) {
-		m_marked = Marking::QuestionMark;
+		if (m_minefield->questionMarkAvailability()) {
+			m_marked = Marking::QuestionMark;
+		}
+		else {
+			m_marked = Marking::Blank;
+		}
 	}
 	else {
 		m_marked = Marking::Blank;

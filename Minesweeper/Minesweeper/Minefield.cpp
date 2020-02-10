@@ -38,6 +38,7 @@ Minefield::Minefield()
 	m_gameState = State::InGame;
 	m_nbBowUnexplored = 1;
 	m_nbMines = 0;
+	m_questionMarkAvailability = true;
 
 	tile = new Box(this, 0, 0);
 	m_field->at(0, 0) = tile;
@@ -63,6 +64,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols)
 	m_gameState = State::InGame;
 	m_nbMines = 0;
 	m_nbBowUnexplored = nbRows*nbCols-m_nbMines;
+	m_questionMarkAvailability = true;
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
@@ -90,6 +92,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 	m_gameState = State::InGame;
 	m_nbMines = nbRows * nbCols*difficultyToDouble(diff);
 	m_nbBowUnexplored = nbRows * nbCols-m_nbMines;
+	m_questionMarkAvailability = true;
 
 	m_field = new Grid<Box*>(nbRows, nbCols);
 	m_mines = new Vector<Box*>;
@@ -120,9 +123,10 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 	m_mines = new Vector<Box*>;
 
 	m_gameState = State::InGame;
-	m_nbBowUnexplored = nbRows * nbCols;
-
 	int m_nbMines = nbRows * nbCols*mineDensity;
+	m_nbBowUnexplored = nbRows * nbCols-m_nbMines;
+	m_questionMarkAvailability = true;
+
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
@@ -149,9 +153,10 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
 	m_mines = new Vector<Box*>;
 
 	m_gameState = State::InGame;
-	m_nbBowUnexplored = nbRows * nbCols;
-
 	m_nbMines = nbMines;
+	m_nbBowUnexplored = nbRows * nbCols-m_nbMines;
+	m_questionMarkAvailability = true;
+
 
 	for (int i = 0; i < nbRows; ++i) {
 		for (int j = 0; j < nbCols; ++j) {
@@ -187,6 +192,11 @@ Minefield::~Minefield()
 Minefield::State Minefield::gameState()
 {
 	return m_gameState;
+}
+
+bool Minefield::questionMarkAvailability()
+{
+	return m_questionMarkAvailability;
 }
 
 void Minefield::explore(Coordinates pos)
@@ -277,6 +287,10 @@ void Minefield::initialiseMines()
 			i++;
 		}
 	}
+}
+
+void Minefield::setQuestionMarkAvailability(bool availability) {
+	m_questionMarkAvailability = availability;
 }
 
 void Minefield::evaluateState()

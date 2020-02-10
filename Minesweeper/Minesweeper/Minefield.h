@@ -43,6 +43,7 @@ public:
 	~Minefield();
 
 	State gameState();
+	bool questionMarkAvailability();
 
 	void explore(Coordinates pos);
 	void mark(Coordinates pos);
@@ -57,6 +58,7 @@ signals:
 	void victory();
 
 public slots:
+	void setQuestionMarkAvailability(bool availability);
 	void evaluateState();
 	void endOfGame();
 	
@@ -66,6 +68,7 @@ private:
 
 	State m_gameState;
 
+	bool m_questionMarkAvailability;
 	int m_nbBowUnexplored;
 	int m_nbMines;
 

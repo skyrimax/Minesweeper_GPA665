@@ -81,6 +81,7 @@ void Box::mark()
 {
 	if (m_marked == Marking::Blank) {
 		m_marked = Marking::Flag;
+		m_minefield->decShownNbMines();
 	}
 	else if (m_marked == Marking::Flag) {
 		if (m_minefield->questionMarkAvailability()) {
@@ -89,6 +90,7 @@ void Box::mark()
 		else {
 			m_marked = Marking::Blank;
 		}
+		m_minefield->incShownNbMines();
 	}
 	else {
 		m_marked = Marking::Blank;

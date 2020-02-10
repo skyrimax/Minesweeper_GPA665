@@ -44,11 +44,14 @@ public:
 
 	State gameState();
 	bool questionMarkAvailability();
+	int shownNbMines();
 
 	void explore(Coordinates pos);
 	void mark(Coordinates pos);
 
 	void boxExplored();
+	void incShownNbMines();
+	void decShownNbMines();
 
 	void initialiseNeighbors();
 	void initialiseMines();
@@ -56,6 +59,8 @@ public:
 signals:
 	void loss();
 	void victory();
+	void nbMinesChanged(int nbMines);
+	void clicked();
 
 public slots:
 	void setQuestionMarkAvailability(bool availability);
@@ -71,6 +76,7 @@ private:
 	bool m_questionMarkAvailability;
 	int m_nbBowUnexplored;
 	int m_nbMines;
+	int m_shownNbMines;
 
 	UIType m_uiType;
 };

@@ -27,12 +27,19 @@ Minesweeper::Minesweeper(QWidget *parent)
 	//Connecting the exit menu action to quitting the program
 	connect(ui.actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
+	//Connect the timer to the slot incrementing the time
+	connect(&m_timer, SIGNAL(timeout()), this, SLOT(incTime()));
+	connect(ui.lcdTime, SIGNAL(overflow()), &m_timer, SLOT(stop()));
+
 	m_game = nullptr;
 	superEasyGame();
 }
 
 void Minesweeper::newGame()
 {
+	m_timer.stop();
+	ui.lcdTime->display(0);
+
 	if (m_game != nullptr) {
 		delete m_game;
 	}
@@ -48,10 +55,15 @@ void Minesweeper::newGame()
 
 	connect(m_game, SIGNAL(victory()), this, SLOT(victory()));
 	connect(m_game, SIGNAL(loss()), this, SLOT(loss()));
+	connect(m_game, SIGNAL(nbMinesChanged(int)), ui.lcdNbBombs, SLOT(display(int)));
 
 	//Connecting the Mark(?) menu action to the function enabling and disabling the use of ?
 	connect(ui.actionMarks, SIGNAL(triggered(bool)), m_game, SLOT(setQuestionMarkAvailability(bool)));
 
+	//Connect the pressing of the first tile to the start of the game
+	connect(m_game, SIGNAL(clicked()), this, SLOT(startGame()));
+
+	ui.lcdNbBombs->display(m_game->shownNbMines());
 	minimalSize();
 }
 
@@ -102,12 +114,14 @@ void Minesweeper::superHardGame()
 
 void Minesweeper::customGame()
 {
+	m_timer.stop();
+	ui.lcdTime->display(0);
+
 	CustomGameParamWindow* w = new CustomGameParamWindow(this);
-	
 
 	if (w->exec()) {
-		nbRows = w->height();
-		nbCols = w->width();
+		nbCols = w->height();
+		nbRows = w->width();
 
 		if (m_game != nullptr) {
 			delete m_game;
@@ -142,14 +156,20 @@ void Minesweeper::customGame()
 		//Connecting the Mark(?) menu action to the function enabling and disabling the use of ?
 		connect(ui.actionMarks, SIGNAL(triggered(bool)), m_game, SLOT(setQuestionMarkAvailability(bool)));
 
+		//Connect the pressing of the first tile to the start of the game
+		connect(m_game, SIGNAL(clicked()), this, SLOT(startGame()));
+
 		minimalSize();
 	}
+	else
+		m_timer.start();
 
 	delete w;
 }
 
 void Minesweeper::victory()
 {
+	m_timer.stop();
 	QPixmap image;
 	image.load(":/Minesweeper/sprites/victory.png");
 	QIcon icon(image);
@@ -159,11 +179,24 @@ void Minesweeper::victory()
 
 void Minesweeper::loss()
 {
+
+	m_timer.stop();
 	QPixmap image;
 	image.load(":/Minesweeper/sprites/dead.png");
 	QIcon icon(image);
 	ui.newGameButton->setIcon(icon);
 	ui.newGameButton->setIconSize(image.rect().size());
+}
+
+void Minesweeper::incTime()
+{
+	ui.lcdTime->display(ui.lcdTime->intValue() + 1);
+}
+
+void Minesweeper::startGame()
+{
+	disconnect(m_game, SIGNAL(clicked()), this, SLOT(startGame()));
+	m_timer.start(1000);
 }
 
 void Minesweeper::minimalSize()

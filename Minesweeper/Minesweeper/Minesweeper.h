@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QActionGroup>
+#include <QTimer>
 #include "ui_Minesweeper.h"
 #include "Minefield.h"
 #include "CustomGameParamWindow.h"
@@ -25,6 +26,9 @@ public slots:
 	void victory();
 	void loss();
 
+	void incTime();
+	void startGame();
+
 private:
 	//UI size management
 	void minimalSize();
@@ -32,6 +36,7 @@ private:
 	Ui::MinesweeperClass ui;
 	Minefield* m_game;
 	QActionGroup* difficultyGroup;
+	QTimer m_timer;
 
 	Minefield::DifficultyLevel diff;
 	int nbRows;

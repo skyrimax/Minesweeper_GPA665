@@ -38,6 +38,7 @@ Minefield::Minefield()
 	m_gameState = State::InGame;
 	m_nbBowUnexplored = 1;
 	m_nbMines = 0;
+	m_shownNbMines = m_nbMines;
 	m_questionMarkAvailability = true;
 
 	tile = new Box(this, 0, 0);
@@ -45,6 +46,7 @@ Minefield::Minefield()
 	addItem(tile);
 
 	connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
+	connect(tile, SIGNAL(clicked()), this, SIGNAL(clicked()));
 
 	connect(this, SIGNAL(victory()), this, SLOT(endOfGame()));
 	connect(this, SIGNAL(loss()), this, SLOT(endOfGame()));
@@ -63,7 +65,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols)
 
 	m_gameState = State::InGame;
 	m_nbMines = 0;
-	m_nbBowUnexplored = nbRows*nbCols-m_nbMines;
+	m_shownNbMines = m_nbMines;
+	m_nbBowUnexplored = nbRows * nbCols - m_nbMines;
 	m_questionMarkAvailability = true;
 
 	for (int i = 0; i < nbRows; ++i) {
@@ -73,6 +76,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols)
 			addItem(tile);
 
 			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
+			connect(tile, SIGNAL(clicked()), this, SIGNAL(clicked()));
 		}
 	}
 
@@ -91,7 +95,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 
 	m_gameState = State::InGame;
 	m_nbMines = nbRows * nbCols*difficultyToDouble(diff);
-	m_nbBowUnexplored = nbRows * nbCols-m_nbMines;
+	m_shownNbMines = m_nbMines;
+	m_nbBowUnexplored = nbRows * nbCols - m_nbMines;
 	m_questionMarkAvailability = true;
 
 	m_field = new Grid<Box*>(nbRows, nbCols);
@@ -104,6 +109,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, DifficultyLevel diff)
 			addItem(tile);
 
 			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
+			connect(tile, SIGNAL(clicked()), this, SIGNAL(clicked()));
 		}
 	}
 
@@ -124,7 +130,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 
 	m_gameState = State::InGame;
 	int m_nbMines = nbRows * nbCols*mineDensity;
-	m_nbBowUnexplored = nbRows * nbCols-m_nbMines;
+	m_shownNbMines = m_nbMines;
+	m_nbBowUnexplored = nbRows * nbCols - m_nbMines;
 	m_questionMarkAvailability = true;
 
 
@@ -135,6 +142,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, double mineDensity)
 			addItem(tile);
 
 			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
+			connect(tile, SIGNAL(clicked()), this, SIGNAL(clicked()));
 		}
 	}
 
@@ -154,7 +162,8 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
 
 	m_gameState = State::InGame;
 	m_nbMines = nbMines;
-	m_nbBowUnexplored = nbRows * nbCols-m_nbMines;
+	m_shownNbMines = m_nbMines;
+	m_nbBowUnexplored = nbRows * nbCols - m_nbMines;
 	m_questionMarkAvailability = true;
 
 
@@ -165,6 +174,7 @@ Minefield::Minefield(size_type nbRows, size_type nbCols, int nbMines)
 			addItem(tile);
 
 			connect(tile, SIGNAL(released()), this, SLOT(evaluateState()));
+			connect(tile, SIGNAL(clicked()), this, SIGNAL(clicked()));
 		}
 	}
 
@@ -199,6 +209,11 @@ bool Minefield::questionMarkAvailability()
 	return m_questionMarkAvailability;
 }
 
+int Minefield::shownNbMines()
+{
+	return m_shownNbMines;
+}
+
 void Minefield::explore(Coordinates pos)
 {
 	m_field->at(pos.row(), pos.col())->expose();
@@ -214,6 +229,18 @@ void Minefield::mark(Coordinates pos)
 void Minefield::boxExplored()
 {
 	m_nbBowUnexplored--;
+}
+
+void Minefield::incShownNbMines()
+{
+	++m_shownNbMines;
+	emit nbMinesChanged(m_shownNbMines);
+}
+
+void Minefield::decShownNbMines()
+{
+	--m_shownNbMines;
+	emit nbMinesChanged(m_shownNbMines);
 }
 
 void Minefield::initialiseNeighbors()

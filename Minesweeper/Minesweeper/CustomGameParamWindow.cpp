@@ -9,8 +9,6 @@ CustomGameParamWindow::CustomGameParamWindow(QWidget *parent)
 	ui.methodButtonGroup->setId(ui.densityRadioButton, 1);
 	ui.methodButtonGroup->setId(ui.difficultyRadioButton, 2);
 
-	m_canceled = false;
-
 	connect(ui.nbMinesRadioButton, SIGNAL(toggled(bool)), ui.nbMinesSpinBox, SLOT(setEnabled(bool)));
 	connect(ui.densityRadioButton, SIGNAL(toggled(bool)), ui.densitySpinBox, SLOT(setEnabled(bool)));
 	connect(ui.difficultyRadioButton, SIGNAL(toggled(bool)), ui.difficultyComboBox, SLOT(setEnabled(bool)));
@@ -67,9 +65,4 @@ Minefield::DifficultyLevel CustomGameParamWindow::difficulty()
 	default:
 		break;
 	}
-}
-
-bool CustomGameParamWindow::canceled()
-{
-	return m_canceled;
 }

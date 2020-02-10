@@ -103,9 +103,9 @@ void Minesweeper::superHardGame()
 void Minesweeper::customGame()
 {
 	CustomGameParamWindow* w = new CustomGameParamWindow(this);
-	w->exec();
+	
 
-	if (!w->canceled()) {
+	if (w->exec()) {
 		nbRows = w->height();
 		nbCols = w->width();
 
@@ -144,6 +144,8 @@ void Minesweeper::customGame()
 
 		minimalSize();
 	}
+
+	delete w;
 }
 
 void Minesweeper::victory()

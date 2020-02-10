@@ -18,10 +18,7 @@ public:
 	int nbMines();
 	double densityMines();
 	Minefield::DifficultyLevel difficulty();
-	bool canceled();
 
 private:
 	Ui::CustomGameParamWindow ui;
-
-	bool m_canceled;
 };

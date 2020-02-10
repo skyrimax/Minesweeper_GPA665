@@ -4,6 +4,7 @@
 #include <QActionGroup>
 #include "ui_Minesweeper.h"
 #include "Minefield.h"
+#include "CustomGameParamWindow.h"
 
 class Minesweeper : public QMainWindow
 {

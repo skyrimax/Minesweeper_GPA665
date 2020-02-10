@@ -44,6 +44,7 @@ void Minesweeper::newGame()
 	ui.newGameButton->setIconSize(image.rect().size());
 
 	m_game = new Minefield(nbRows, nbCols, diff);
+	ui.minefieldView->setScene(m_game);
 
 	connect(m_game, SIGNAL(victory()), this, SLOT(victory()));
 	connect(m_game, SIGNAL(loss()), this, SLOT(loss()));
@@ -101,7 +102,48 @@ void Minesweeper::superHardGame()
 
 void Minesweeper::customGame()
 {
-	newGame();
+	CustomGameParamWindow* w = new CustomGameParamWindow(this);
+	w->exec();
+
+	if (!w->canceled()) {
+		nbRows = w->height();
+		nbCols = w->width();
+
+		if (m_game != nullptr) {
+			delete m_game;
+		}
+
+		QPixmap image;
+		image.load(":/Minesweeper/sprites/smile.png");
+		QIcon icon(image);
+		ui.newGameButton->setIcon(icon);
+		ui.newGameButton->setIconSize(image.rect().size());
+
+		switch (w->qtyMinesMethod())
+		{
+		case 0:
+			m_game = new Minefield(nbRows, nbCols, w->nbMines());
+			break;
+		case 1:
+			m_game = new Minefield(nbRows, nbCols, w->densityMines());
+			break;
+		case 2:
+			m_game = new Minefield(nbRows, nbCols, w->difficulty());
+			break;
+		default:
+			break;
+		}
+
+		ui.minefieldView->setScene(m_game);
+
+		connect(m_game, SIGNAL(victory()), this, SLOT(victory()));
+		connect(m_game, SIGNAL(loss()), this, SLOT(loss()));
+
+		//Connecting the Mark(?) menu action to the function enabling and disabling the use of ?
+		connect(ui.actionMarks, SIGNAL(triggered(bool)), m_game, SLOT(setQuestionMarkAvailability(bool)));
+
+		minimalSize();
+	}
 }
 
 void Minesweeper::victory()
@@ -125,7 +167,6 @@ void Minesweeper::loss()
 void Minesweeper::minimalSize()
 {
 	//Widgets in main frame
-	ui.minefieldView->setScene(m_game);
 	ui.minefieldView->setFixedSize(16 * nbRows + 4, 16 * nbCols + 4);
 	ui.minefieldView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	ui.minefieldView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

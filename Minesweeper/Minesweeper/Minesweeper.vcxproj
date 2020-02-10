@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Coordinates.cpp" />
+    <ClCompile Include="CustomGameParamWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Minefield.cpp" />
     <ClCompile Include="Minesweeper.cpp" />
@@ -98,6 +99,9 @@
     <QtMoc Include="Minesweeper.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="CustomGameParamWindow.ui">
+      <SubType>Designer</SubType>
+    </QtUic>
     <QtUic Include="Minesweeper.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +110,7 @@
   <ItemGroup>
     <QtMoc Include="Box.h" />
     <ClInclude Include="Coordinates.h" />
+    <QtMoc Include="CustomGameParamWindow.h" />
     <ClInclude Include="Grid.h" />
     <QtMoc Include="Minefield.h" />
     <ClInclude Include="Vector.h" />

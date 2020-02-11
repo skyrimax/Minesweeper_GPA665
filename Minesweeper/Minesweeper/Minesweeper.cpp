@@ -159,6 +159,7 @@ void Minesweeper::customGame()
 		//Connect the pressing of the first tile to the start of the game
 		connect(m_game, SIGNAL(clicked()), this, SLOT(startGame()));
 
+		ui.lcdNbBombs->display(m_game->shownNbMines());
 		minimalSize();
 	}
 	else

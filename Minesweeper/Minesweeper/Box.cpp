@@ -184,12 +184,7 @@ void Box::setImage()
 		switch (m_value)
 		{
 		case -1:
-			if (m_marked == Marking::QuestionMark) {
-				m_sprite.load(":/Minesweeper/sprites/mine_wrong_guess.png");
-			}
-			else {
-				m_sprite.load(":/Minesweeper/sprites/mine.png");
-			}
+			m_sprite.load(":/Minesweeper/sprites/mine.png");
 			break;
 		case 0:
 			m_sprite.load(":/Minesweeper/sprites/empty.png");

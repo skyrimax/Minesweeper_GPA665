@@ -61,6 +61,7 @@ signals:
 	void victory();
 	void nbMinesChanged(int nbMines);
 	void clicked();
+	void released();
 
 public slots:
 	void setQuestionMarkAvailability(bool availability);

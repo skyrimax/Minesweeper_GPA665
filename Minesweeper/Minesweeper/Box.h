@@ -21,18 +21,22 @@ public:
 	Box(Minefield* minefield, int row, int col, int value = 0, bool exposed = false, Marking marked = Marking::Blank);
 	~Box();
 
+	// Accessors and mutators
 	bool exposed();
 	int value();
 	void setValue(int value);
 	Marking marked();
 
+	// Methods for usages diring game
 	void expose();
 	void mark();
 	void revealForEndOfGame();
 
+	// Methods related to the neighbors
 	void addNeighbors(Box* neighbor);
 	void clearNeighbors();
 
+	// Methods related to the value of the box
 	void initialiseMines();
 
 signals:
